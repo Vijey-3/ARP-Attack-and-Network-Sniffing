@@ -1,76 +1,74 @@
+# Echoserver
+Echo server and client using python socket
 
-# ARP-Attack-and-Network-Sniffing
-# Explore Network Sniffing and ARP Attacks
+## NAME: MARIO VIOFER J
+## REGISTER NO.: 212223100032
 
 # AIM:
 
-To explore network sniffing and ARP Attacks
+To develop a simple webserver to serve html programming pages.
 
-## STEPS:
+## DESIGN STEPS:
 
 ### Step 1:
 
-Install kali linux either in partition or virtual box or in live mode
+Design of echo server and client using python socket
 
 ### Step 2:
 
-Investigate on the various categories of tools as follows:
-
+Implementation using Python code
 
 ### Step 3:
-Open terminal and try execute some kali linux commands
 
-## ARP Attacks:  
-ARP spoofing: A hacker sends fake ARP packets that link an attacker's MAC address with an IP of a computer already on the LAN. 
-Boot kali and Windows7 virtual machines.
-In windows 7 give the command arp -a
+Testing the server and client 
+
+## PROGRAM:
+### CLIENT:
+~~~
+import socket
+
+
+HOST = "127.0.0.1"  # The server's hostname or IP address
+PORT = 65432  # The port used by the server
+
+
+with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+    s.connect((HOST, PORT))
+    s.sendall(b"Hello, world")
+    data = s.recv(1024)
+
+
+print(f"Received {data!r}")
+~~~
+### SERVER:
+~~~
+import socket
+
+
+HOST = "127.0.0.1"  # Standard loopback interface address (localhost)
+PORT = 65432  # Port to listen on (non-privileged ports are > 1023)
+
+
+with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+    s.bind((HOST, PORT))
+    s.listen()
+    conn, addr = s.accept()
+    with conn:
+        print(f"Connected by {addr}")
+        while True:
+            data = conn.recv(1024)
+            if not data:
+                break
+            conn.sendall(data)
+~~~
 ## OUTPUT:
-![arp-a](arp-a.png)
+### CLIENT:
 
-![arp -a change](<arp -a 1.png>)
+![alt text](<client.png>)
 
+### SERVER:
 
-From kali linux issue the command :
-sudo arpspoof -i eth0 -t <target system> <gateway>
-## OUTPUT:
-
-![arpspoof](arpspoof.png)
-
-
- dsniff:
-
-
-
-
-
-
-In Metasploit open the ftp console as below. Also you can try other ftp websites ftp.vim.org
-## OUTPUT:
-
-![ftp <ip>](<ftp ip.png>)
-
-
-In Kali issue the following commands:
-sudo dsnifff
-## OUTPUT:
-
-![dsniff](dsniff.png)
-
-Invoke the wireshark and examine the various menus  and controls of the tool:
-
-## OUTPUT :
-
-![WIRESHARK](<og wi.png>)
-
-
-## Ettercap
-
-Ettercap supports active and passive dissection of many protocols (even encrypted ones) and includes many feature for network and host analysis.
-Ettercap can be used as sniffing tool as illustrated below:
-
-## OUTPUT :
-
-![ETTERCAP](<og wire.png>)
+![alt text](<server.png>)
 
 ## RESULT:
-The kali linux tools for ARP Attack and Network Sniffing were identified successfully
+The program is executed successfully
